@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "Link Lantern",
+  "description": "Warns you about recently created domains.",
+  "version": "0.2.3",
+  "icons": {
+    "16": "assets/icons/default/icon-16.png",
+    "32": "assets/icons/default/icon-32.png",
+    "48": "assets/icons/default/icon-48.png",
+    "128": "assets/icons/default/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://rdap.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "public_suffix_list.js",
+        "domain_age.js",
+        "popup.js",
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "type": "module",
+    "preferred_environment": [
+      "service_worker",
+      "document"
+    ],
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Link Lantern",
+    "default_icon": {
+      "16": "assets/icons/default/icon-16.png",
+      "32": "assets/icons/default/icon-32.png",
+      "48": "assets/icons/default/icon-48.png",
+      "128": "assets/icons/default/icon-128.png"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{27943856-3c3d-4646-82d4-821d6e80c84a}",
+      "strict_min_version": "136.0"
+    }
+  }
+}
